@@ -9,3 +9,4 @@ python_version = "3.9"
 [packages]
 bs4 = "*"
 requests = "*"
+python-telegram-bot = "*"
