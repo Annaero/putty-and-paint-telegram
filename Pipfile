@@ -3,8 +3,5 @@ url = "https://github.com/Annaero/putty-and-paint-telegram"
 verify_ssl = true
 name = "putty-and-paint-telegram"
  
-[packages]
-# flask = "*"
- 
 [requires]
 python_version = "3.9"
