@@ -1,7 +1,11 @@
 [[source]]
-url = "https://github.com/Annaero/putty-and-paint-telegram"
+url = "https://pypi.org/simple"
 verify_ssl = true
-name = "putty-and-paint-telegram"
- 
+name = "pypi"
+
 [requires]
 python_version = "3.9"
+
+[packages]
+bs4 = "*"
+requests = "*"
