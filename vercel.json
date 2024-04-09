@@ -1,14 +1,1 @@
-{
-    "redirects": [
-        {
-            "source": "/",
-            "destination": "/api"
-        }
-    ],
-    "crons": [
-        {
-            "path": "/",
-            "schedule": "0 15 * * *"
-        }
-    ]
-}
+{}

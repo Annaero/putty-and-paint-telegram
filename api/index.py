@@ -44,7 +44,6 @@ def get_kv_max_id():
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        self.send_response(200)
         self.send_header("Content-type", "text/plain")
         self.end_headers()
 
@@ -55,6 +54,7 @@ class handler(BaseHTTPRequestHandler):
 
         if response.status_code != 200:
             print("ERROR:", f"Got response: {response}")
+            self.send_response(503)
             self.wfile.write("Job is failed :(".encode("utf-8"))
             return
 
@@ -66,6 +66,7 @@ class handler(BaseHTTPRequestHandler):
             max_processed_id = get_kv_max_id()
         except Exception as e:
             print("ERROR:", f"can't read value from KV: {e}")
+            self.send_response(503)
             self.wfile.write("Job is failed :(".encode("utf-8"))
             return
 
