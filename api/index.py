@@ -1,4 +1,5 @@
 import asyncio
+from http.client import HTTPException
 import os
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urljoin, urlparse
@@ -43,19 +44,28 @@ def get_kv_max_id():
 
 
 class handler(BaseHTTPRequestHandler):
-    def do_GET(self):
+    def set_headers(self, code: int, message: str):
+        self.send_response(code)
         self.send_header("Content-type", "text/plain")
         self.end_headers()
+        self.wfile.write(message.encode("utf-8"))
+        return
+
+    def do_GET(self):
 
         print(
             "INFO:", f"Requesting projects page {PROJECTS_URL}"
         )  # By some reason `logging` do not works correctly with Vercel
-        response = requests.get(PROJECTS_URL)
+        try:
+            response = requests.get(PROJECTS_URL)
+        except HTTPException as e:
+            print("ERROR:", f"Cont complete request {e}")
+            self.set_headers(500, "Job is failed :(")
+            return
 
         if response.status_code != 200:
             print("ERROR:", f"Got response: {response}")
-            self.send_response(503)
-            self.wfile.write("Job is failed :(".encode("utf-8"))
+            self.set_headers(500, "Job is failed :(")
             return
 
         soup = BeautifulSoup(response.text, "html.parser")
@@ -66,8 +76,7 @@ class handler(BaseHTTPRequestHandler):
             max_processed_id = get_kv_max_id()
         except Exception as e:
             print("ERROR:", f"can't read value from KV: {e}")
-            self.send_response(503)
-            self.wfile.write("Job is failed :(".encode("utf-8"))
+            self.set_headers(500, "Job is failed :(")
             return
 
         new_max_project_id = 0
@@ -110,7 +119,7 @@ class handler(BaseHTTPRequestHandler):
                 f"No new projects found",
             )
 
-        self.wfile.write("Job is done!".encode("utf-8"))
-        print("INFO:", f"Routine is done")
+        self.set_headers(200, "Job is done!")
+        print("INFO:", "Routine is done")
 
         return
