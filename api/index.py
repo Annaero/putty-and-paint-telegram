@@ -1,10 +1,11 @@
-from http.server import BaseHTTPRequestHandler
 import asyncio
-from bs4 import BeautifulSoup
-import requests
 import os
-from telegram import Bot
+from http.server import BaseHTTPRequestHandler
 from urllib.parse import urljoin, urlparse
+
+import requests
+from bs4 import BeautifulSoup
+from telegram import Bot
 
 ROOT_URL = os.environ.get("PUTTY_AND_PAINT")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
