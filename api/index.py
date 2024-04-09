@@ -103,7 +103,11 @@ class handler(BaseHTTPRequestHandler):
                     "INFO:",
                     f"Going to post image with image: {image_url} and caption: {caption}",
                 )
-                asyncio.run(send_photo(image_url, caption))
+
+                try:
+                    asyncio.run(send_photo(image_url, caption))
+                except Exception as e:
+                    print("WARNING:", f"Failed to post in tg with error {e}")
 
                 new_max_project_id = max(new_max_project_id, project_id)
 
