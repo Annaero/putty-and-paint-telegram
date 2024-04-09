@@ -1,3 +1,6 @@
+Use Vercel functions to collect new posts in (P&P)[https://www.puttyandpaint.com/] projects 
+
+
 # Python
 ```shell
     pip install pipenv
