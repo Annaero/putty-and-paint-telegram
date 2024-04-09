@@ -39,7 +39,7 @@ def get_kv_max_id():
         raise Exception(response.text)
     json = response.json()
     result = json["result"]
-    print("INFO:", f" read max_proj_id {result}")
+    print("INFO:", f"Read max_proj_id {result}")
     return int(result) if result else 0
 
 
