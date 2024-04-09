@@ -6,13 +6,13 @@ import os
 from telegram import Bot
 from urllib.parse import urljoin, urlparse
 
-ROOT_URL = os.environ["PUTTY_AND_PAINT"]
-BOT_TOKEN = os.environ["BOT_TOKEN"]
-CHAT_ID = os.environ["CHAT_ID"]
-KV_REST_API_TOKEN = os.environ["KV_REST_API_TOKEN"]
-KV_REST_API_URL = os.environ["KV_REST_API_URL"]
+ROOT_URL = os.environ.get("PUTTY_AND_PAINT")
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
+KV_REST_API_TOKEN = os.environ.get("KV_REST_API_TOKEN")
+KV_REST_API_URL = os.environ.get("KV_REST_API_URL")
 
-PROJECTS_URL = urljoin(ROOT_URL, os.environ["PROJECTS_URL"])
+PROJECTS_URL = urljoin(ROOT_URL, os.environ.get("PROJECTS_URL"))
 
 
 async def send_photo(photo: str, msg: str):
