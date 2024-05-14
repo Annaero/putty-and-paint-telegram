@@ -110,14 +110,13 @@ class handler(BaseHTTPRequestHandler):
                     print("WARNING:", f"Failed to post in tg with error {e}")
 
                 new_max_project_id = max(new_max_project_id, project_id)
+                print(
+                    "INFO:",
+                    f"Going to update max_proj_id {max_processed_id}->{new_max_project_id}",
+                )
+                increase_kv_id(new_max_project_id)
 
-        if new_max_project_id:
-            print(
-                "INFO:",
-                f"Going to update max_proj_id {max_processed_id}->{new_max_project_id}",
-            )
-            increase_kv_id(new_max_project_id)
-        else:
+        if not new_max_project_id:
             print(
                 "INFO:",
                 f"No new projects found",
